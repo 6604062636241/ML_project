@@ -11,6 +11,10 @@ def preprocess_and_predict(model, test_df):
         'ps_calc_14', 'ps_car_06_cat', 'ps_ind_06_bin', 'ps_calc_11', 'ps_ind_16_bin', 'ps_calc_01',
         'ps_car_12'
     ]
+
+    if 'id' not in test_df.columns:
+        st.error("CSV ไม่มีคอลัมน์ 'id'")
+        return None
     
     test_id = test_df['id']
     X_test_processed = pd.DataFrame()
@@ -24,7 +28,12 @@ def preprocess_and_predict(model, test_df):
     X_test_processed[X_test_processed < -1] = -1
 
     st.info(f"ทำการทำนายข้อมูลจำนวน {X_test_processed.shape[0]} แถว")
-    prediction_proba = model.predict_proba(X_test_processed)[:, 1]
+    
+    try:
+        prediction_proba = model.predict_proba(X_test_processed)[:, 1]
+    except Exception as e:
+        st.error(f"เกิดข้อผิดพลาดระหว่าง predict: {e}")
+        return None
     
     submission_df = pd.DataFrame({
         'id': test_id,
@@ -84,5 +93,3 @@ if uploaded_file is not None:
 
     except Exception as e:
         st.error(f"เกิดข้อผิดพลาดในการอ่านไฟล์หรือประมวลผล: {e}")
-
-st.markdown("---")
