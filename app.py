@@ -66,7 +66,7 @@ submission_df = None
 
 if uploaded_file is not None:
     try:
-        test_data = pd.read_csv(uploaded_file)
+        test_data = pd.read_csv(uploaded_file, dtype='float32')
         st.success(f"ไฟล์ {uploaded_file.name} ถูกโหลดแล้ว ({test_data.shape[0]} แถว, {test_data.shape[1]} คอลัมน์)")
         st.dataframe(test_data.head())
 
