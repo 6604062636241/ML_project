@@ -3,6 +3,9 @@ import pandas as pd
 from io import StringIO
 import pickle
 
+st.cache_data.clear()
+st.cache_resource.clear()
+
 def preprocess_and_predict(model, test_df):
     features_to_keep = [
         'ps_car_13', 'ps_ind_03', 'ps_ind_05_cat', 'ps_reg_02', 'ps_ind_17_bin', 'ps_ind_15',
