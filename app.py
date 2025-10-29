@@ -3,9 +3,6 @@ import pandas as pd
 from io import StringIO
 import pickle
 
-st.cache_data.clear()
-st.cache_resource.clear()
-
 def preprocess_and_predict(model, test_df):
     features_to_keep = [
         'ps_car_13', 'ps_ind_03', 'ps_ind_05_cat', 'ps_reg_02', 'ps_ind_17_bin', 'ps_ind_15',
@@ -85,12 +82,17 @@ if uploaded_file is not None:
                 submission_df.to_csv(csv_buffer, index=False)
                 csv_data = csv_buffer.getvalue()
 
-                st.download_button(
+                downloaded = st.download_button(
                     label="ดาวน์โหลด Submission CSV",
                     data=csv_data,
                     file_name='submission.csv',
                     mime='text/csv'
                 )
+                
+                if downloaded:
+                    st.cache_data.clear()
+                    st.cache_resource.clear()
+                    st.experimental_rerun()
             else:
                 st.error("ไม่สามารถสร้างไฟล์ Submission ได้เนื่องจากเกิดข้อผิดพลาด")
 
