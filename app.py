@@ -28,7 +28,7 @@ def preprocess_and_predict(model, test_df):
     X_test_processed[X_test_processed < -1] = -1
 
     st.info(f"ทำการทำนายข้อมูลจำนวน {X_test_processed.shape[0]} แถว")
-    
+
     try:
         prediction_proba = model.predict_proba(X_test_processed)[:, 1]
     except Exception as e:
@@ -80,7 +80,7 @@ if uploaded_file is not None:
 
                 csv_buffer = StringIO()
                 submission_df.to_csv(csv_buffer, index=False)
-                csv_data = csv_buffer.getvalue().encode('utf-8')
+                csv_data = csv_buffer.getvalue()
 
                 st.download_button(
                     label="ดาวน์โหลด Submission CSV",
