@@ -92,7 +92,6 @@ if uploaded_file is not None:
                 if downloaded:
                     st.cache_data.clear()
                     st.cache_resource.clear()
-                    st.experimental_rerun()
             else:
                 st.error("ไม่สามารถสร้างไฟล์ Submission ได้เนื่องจากเกิดข้อผิดพลาด")
 
