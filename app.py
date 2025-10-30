@@ -59,7 +59,7 @@ st.title("Porto Seguro Prediction (Kaggle)")
 st.markdown("---")
 
 st.header("อัปโหลดไฟล์ทดสอบ (test.csv)")
-st.info("ไฟล์ที่อัปโหลดควรมีคอลัมน์ 'id' และคอลัมน์ฟีเจอร์เหมือนตอน train")
+st.info("ไฟล์ที่อัปโหลดควรมีคอลัมน์ 'id'")
 
 uploaded_file = st.file_uploader("เลือกไฟล์ CSV สำหรับทำนาย (เช่น test.csv)", type=['csv'])
 submission_df = None
